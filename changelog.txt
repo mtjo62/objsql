@@ -1,0 +1,303 @@
+May 13, 2016 12:16:31 PM
+Posted By: mtjo
+Summary: objSQL 3.9.0 released
+
+
+* Verified compatibility with PHP 7 sqlsrv Beta drivers
+* Added helper method obj_batch_data
+* Added batch delete/insert/update operations for all
+  supported databases
+* Refactored obj_row_count method to remove redundant 
+  while loop
+
+
+Notes: CUBRID extension currently not available for PHP 7
+
+***********************************************************************************  
+February 2, 2016 5:32:34 AM
+Posted By: mtjo
+Summary: objSQL 3.8.0 released
+
+
+* Verified compatibility with PHP 7 Production
+
+
+Notes: CUBRID and SQL Server extensions currently not available for PHP 7
+
+***********************************************************************************   
+June 22, 2016 1:47:34 AM
+Posted By: mtjo
+Summary: objSQL 3.7.0 released
+
+
+* Added helper methods obj_cols, obj_data, obj_limit, obj_offset, obj_order_by
+  obj_sort_order, obj_table and obj_where
+* Moved many iterators and conditional statements from main objSQL class to 
+  static helper class - improved code readibility
+
+
+Notes: 
+
+***********************************************************************************     
+January 5, 2016 10:13:13 AM
+Posted By: mtjo
+Summary: objSQL 3.6.0 released
+
+
+* Verified compatibility with PHP 5.6 x64
+* Verified compatibility with SQL Server 14 on x86 and x64
+* Dropped support for nested transactions
+
+
+Notes: 
+
+***********************************************************************************
+November 10, 2014 11:09:23 PM
+Posted By: mtjo
+Summary: objSQL 3.5.2 released
+
+
+* Verified compatibility with Oracle 12c database server
+
+
+Notes:
+
+***********************************************************************************
+Sept 8, 2014 1:12:09 PM
+Posted By: mtjo
+Summary: objSQL 3.5.1 released
+
+
+* Maintenance release
+* Verified compatibility with PHP 5.6
+
+
+Notes: Cubrid drivers not available for PHP 5.6
+       Oracle PDO driver must be used with PHP 5.6 using the 11g database
+
+***********************************************************************************
+April 2, 2014 7:56:01 PM
+Posted By: mtjo
+Summary: objSQL 3.5.0 released
+
+
+* Removed obj_driver() method. The info was moved the obj_info() method. ( obj_info()['DATABASE_DRIVER'] )
+* Updated internal datasource method to only require the database type, ( ie: mysql,sqlite,etc. )
+  in the connection string/array. Backwards compatible with prior versions using the pdo:dbtype string.
+  This eliminates the need to recheck for dbtype throughout the PDO classes.
+* Drivers abstracted to their own directory.
+* Script attempts to load PDO drivers first and defaults to normal drivers if not enabled.
+* Some code and docs refactored for "best coding practices".
+* Verified compatibility with SQL Server 14 Express.
+* Verified compatibility with PHP 5.6 Beta: MySQL, MariaDB, SQLite3, PostgreSQL and Oracle PDO.
+
+
+Notes:
+
+***********************************************************************************
+November 25, 2013 9:18:11 PM
+Posted By: mtjo
+Summary: Bug fix
+
+* Fixed bug in obj_paging() and obj_helper_paging() methods for the Firebird driver
+
+Notes:
+
+***********************************************************************************
+November 3, 2013 5:12:20 PM
+Posted By: mtjo
+Summary: objSQL 3.3.0 released
+
+* Added support for the Firebird DB server.
+
+Notes:
+
+***********************************************************************************
+August 15, 2013 7:02:20 AM
+Posted By: mtjo
+Summary: objSQL 3.2.0 released
+
+* Added support for PDO drivers.
+* Verified compatibility with PHP 5.5.
+* Fixed bug in $obj_helper_update() method that returned multiple
+  instances of array values in SQL query.
+* Added new method obj_row_count(args) - returns num rows with arguments.
+* Removed obj_autocommit_mode() method.
+
+Notes:
+
+***********************************************************************************
+May 23, 2013 8:09:14 AM
+Posted By: mtjo
+Summary: objSQL 3.1.0 released
+
+* Added support for the CUBRID DB server.
+* Dropped support for PHP 5.3
+
+Notes: Supports CUBRID version 9.1+
+
+***********************************************************************************
+April 21, 2013 12:09:14 PM
+Posted By: mtjo
+Summary: objSQL 3.0.1 released
+
+* Updated objSQL class to support SQL Server 2012.
+* Fixed bug in obj_paging helper method where last_page element returned all rows (num rows) regardless of where clause.
+
+Notes:
+
+***********************************************************************************
+September 5, 2012 4:09:14 PM
+Posted By: mtjo
+Summary: objSQL 3.0.0 released
+
+* DB connection, statement, resultset and transaction drivers were encapsulated into
+  a single script for each database driver.
+* Sequence methods were dropped.
+* Support dropped for Oracle, Sybase, DB2, Ingres, Firebird, MaxDB, Sybase, SQLite2
+  and SQL Server 2000/2003 servers.
+* Added support for the MariaDB server.
+* SQL Server DB type argument for datasource array changed from mssql to sqlsrv.
+* All public methods were prepended with "obj_". This was done to help avoid collisions
+  with methods from other libraries and to aid in code maintenance.
+* Added prepared statement classes.
+* Three public methods were renamed:
+
+      fetch_array() -> obj_fetch_assoc()
+      fetch_row()   -> obj_fetch_num()
+      flush()       -> obj_free_result()
+
+* Public methods added:
+
+      obj_autocommit_mode()
+      obj_error()
+      obj_error_message()
+      obj_escape()
+      obj_paging()
+      obj_close_statement()
+      obj_free_statement()
+      obj_prepare_statement()
+
+* Updated and optimized statement and resultset classes.
+* SQLite 3 now emulates num_rows() and fetch_object() without additional queries by
+  utilizing the resultset resource.
+
+Notes:
+
+This version, 3.0.0, breaks previous versions. This is due to the renaming of
+public methods and dropped database support. It is recommended to use this version
+with new projects.
+
+***********************************************************************************
+
+June 03, 2010 01:09:14 PM
+Posted By: mtjo
+Summary: objSQL 2.1.0 released
+
+* Added drivers for SQLite3
+
+Notes:
+
+***********************************************************************************
+
+January 27, 2008 10:09:14 AM
+Posted By: mtjo
+Summary: objSQL 2.0.0 released
+
+* Added helper methods: insert(), delete(), select(), update() and server_version()
+* DB connection, transaction and sequence methods were encapsulated and classed for
+  each particular database driver
+* getGenerator() and setGenerator() methods were removed - sequence() and create_sequence()
+  are now used exclusively
+* Many public methods were renamed in the standard PHP syntax:
+
+      setSequence()  -> create_sequence()
+      getSequence()  -> sequence()
+      disconnect()   -> close()
+      connectionID() -> connection()
+      resultID()     -> result()
+      execute()      -> query() - non-prepared query
+      affectedRows() -> affected_rows()
+      numRows()      -> num_rows()
+      numFields()    -> num_fields()
+      nextRow()      -> fetch_array() - assoc array resultset
+      nextRow(true)  -> fetch_row() - numeric array resultset
+      nextObject()   -> fetch_object()
+      getField()     -> field()
+
+* Updated conditionals in the public limit() and offset() methods and the private
+  setSequence() method to verify the argument is_numeric and casts as a true unsigned integer.
+  The bind() method was also updated to verify that a numeric argument is not treated as a
+  string value. This caused errors with $_POST numeric data in Sybase and DB2. The check was added
+  to all database drivers as a precaution.
+* Transaction methods now return a bool/resource for exception handling
+* Updated error handling in all classes where a native query was used
+
+Notes:
+
+This version, 2.0.0, breaks previous versions. This is mainly due to the renaming of public methods.
+It is recommended to use this version with new projects.
+
+***********************************************************************************
+
+April 7, 2007 10:09:14 PM
+Posted By: mtjo
+Summary: objSQL 1.3.0 released
+
+* Added support for Ingres, MaxDB and Sybase ASE
+* Added sequence support for DB2 and PostgreSQL
+
+Notes:
+
+This version adds the methods sequence() and setSequence() to replace generator() and
+setGenerator(). generator() and setGenerator() was kept as an alias for backwords
+compatibility. Minor bugfix in the mysqlResultset class to fix incorrect connection ID
+in error function.
+
+***********************************************************************************
+
+September 17, 2006 10:09:14 AM
+Posted By: mtjo
+Summary: objSQL 1.2.0 released
+
+* Renamed the class datasource to objSQL
+* Added the method datasource() to handle the database connection/validation in extended
+  classes.
+
+Notes:
+
+This minor release breaks previous versions. The main reason for this was the inability
+to easily extend objSQL. See objSQL_1.2.0_docs.zip for usage.
+
+***********************************************************************************
+
+April 16, 2006 07:07:16 AM
+Posted By: mtjo
+Summary: objSQL 1.1.0 released
+
+* Added support for the IBM DB2 database server
+* Enabled transaction support for SQLite
+* Changed the $this->nextRow() methods to require a true argument to return numeric
+  indices for all database types
+
+Notes:
+
+objSQL ver. 1.1.0 adds support for IBM's DB2 database server
+and transaction of SQLite. This minor release breaks previous
+versions. The main reason for this was with the addition of DB2,
+the $this->nextRow() method would require the true argument for
+numeric indexes. For the sake of a consistent interface, all
+database types now require this argument. The $this->numRows()
+method for Firebird/Interbase, Oracle and DB2 require a
+"SELECT count(*)..." statement to return true numrows functionality.
+SQLite does not support savepoints and utilizes an "all or nothing"
+approach.
+
+***********************************************************************************
+
+April 4, 2006 10:04:16 AM
+Posted By: mtjo
+Summary: objSQL 1.0.4 Beta mssql driver bug fix
+
+* The mssqlResultset driver had a strtoupper function in the getField() method and this
+  was removed. Still not sure why it was even there. This has been updated in the downloads.
