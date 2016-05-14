@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>objSQL 3.9.0 Documentation</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="obj_style.css" />
+</head>
+<body>
+	<div id="header">
+		<img src="data:image/png;base64,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" alt="objSQL" title="objSQL">
+	</div>
+	<hr class="hide" />
+    <div id="navigation"><a href="index.html">objSQL 3.9.0 Main</a> -> Statement Methods -> obj_paging</div>
+    <hr class="hide" />
+	<div id="container">
+		<div id="col_2">
+			<h4>Project Pages</h4>
+			
+			<a href="http://www.phpclasses.org/package/8033-PHP-objSQL-is-a-PHP5-database-access-class.html" title="PHP Classes"><div>PHP Classes</div></a>
+			<a href="https://sourceforge.net/projects/objsql/" title="SourceForge"><div>SourceForge</div></a>
+			<a href="http://sourceforge.net/projects/objsql/files/objSQL%20 3.9.0/" title="Downloads"><div>Downloads</div></a>
+			<a href="http://objsql.sourceforge.net/objSQL_docs/" title="Documentation"><div>Archived Documentation</div></a>
+            <br />
+			<h4>DB Connection Methods</h4>
+			<a href="objsql.html" title="objSQL"><div>objSQL</div></a>
+			<a href="obj_close.html" title="obj_close"><div>obj_close</div></a>
+            <br />
+            <h4>Error Handling Methods</h4>
+			<a href="obj_error.html" title="obj_error"><div>obj_error</div></a>
+			<a href="obj_error_msg.html" title="obj_error_message"><div>obj_error_message</div></a>
+            <br />
+            <h4>Statement Methods</h4>
+			<a href="obj_delete.html" title="obj_delete"><div>obj_delete</div></a>
+            <a href="obj_insert.html" title="obj_insert"><div>obj_insert</div></a>
+            <a href="obj_paging.html" title="obj_paging"><div class="active">obj_paging</div></a>
+            <a href="obj_query.html" title="obj_query"><div>obj_query</div></a>
+            <a href="obj_select.html" title="obj_select"><div>obj_select</div></a>
+			<a href="obj_update.html" title="obj_update"><div>obj_update</div></a>
+            <br />
+            <h4>Statement Argument Methods</h4>
+            <a href="obj_batch_data.html" title="obj_cols"><div>obj_batch_data</div></a>
+            <a href="obj_cols.html" title="obj_cols"><div>obj_cols</div></a>
+            <a href="obj_data.html" title="obj_data"><div>obj_data</div></a>
+            <a href="obj_limit.html" title="obj_limit"><div>obj_limit</div></a>
+            <a href="obj_offset.html" title="obj_offset"><div>obj_offset</div></a>
+			<a href="obj_order_by.html" title="obj_order_by"><div>obj_order_by</div></a>
+            <a href="obj_sort_order.html" title="obj_sort_order"><div>obj_sort_order</div></a>
+			<a href="obj_table.html" title="obj_table"><div>obj_table</div></a>
+            <a href="obj_where.html" title="obj_where"><div>obj_where</div></a>
+            <br />
+            <h4>Resultset Methods</h4>
+			<a href="obj_affected_rows.html" title="obj_affected_rows"><div>obj_affected_rows</div></a>
+            <a href="obj_fetch_assoc.html" title="obj_fetch_assoc"><div>obj_fetch_assoc</div></a>
+            <a href="obj_fetch_num.html" title="obj_fetch_num"><div>obj_fetch_num</div></a>
+            <a href="obj_fetch_object.html" title="obj_fetch_object"><div>obj_fetch_object</div></a>
+            <a href="obj_field.html" title="obj_field"><div>obj_field</div></a>
+            <a href="obj_free_result.html" title="obj_free_result"><div>obj_free_result</div></a>
+            <a href="obj_num_fields.html" title="obj_num_fields"><div>obj_num_fields</div></a>
+			<a href="obj_num_rows.html" title="obj_num_rows"><div>obj_num_rows</div></a>
+            <br />
+            <h4>Prepared Statement Methods</h4>
+			<a href="obj_bind.html" title="obj_bind"><div>obj_bind</div></a>
+            <a href="obj_close_statement.html" title="obj_close_statement"><div>obj_close_statement</div></a>
+            <a href="obj_execute.html" title="obj_execute"><div>obj_execute</div></a>
+            <a href="obj_free_statement.html" title="obj_free_statement"><div>obj_free_statement</div></a>
+            <a href="obj_prepare_statement.html" title="obj_prepare_statement"><div>obj_prepare_statement</div></a>
+            <br />
+            <h4>Transaction Methods</h4>
+			<a href="obj_commit.html" title="obj_commit"><div>obj_commit</div></a>
+            <a href="obj_rollback.html" title="obj_rollback"><div>obj_rollback</div></a>
+            <a href="obj_savepoint.html" title="obj_savepoint"><div>obj_savepoint</div></a>
+			<a href="obj_transaction.html" title="obj_transaction"><div>obj_transaction</div></a>
+            <br />
+            <h4>Utility Methods</h4>
+			<a href="obj_escape.html" title="obj_escape"><div>obj_escape</div></a>
+			<a href="obj_info.html" title="obj_info"><div>obj_info</div></a>
+            <a href="obj_row_count.html" title="obj_row_count"><div>obj_row_count</div></a>
+            <br />
+		</div>
+		<hr class="hide" />
+		<div id="col_1">
+			<h2>obj_paging()</h2>
+			<div class="info_box">
+				<h4>Description:</h4>
+				<p>The obj_paging method allows you to facilitate recordset paging queries with minimal SQL markup and is called from the objSQL class. Common uses include online catalogs where the user can view multi-page results by specifying a price range, color, material, etc., as well as display the results by ordering by price or availability.</p>
+<ul>
+<li>The table name argument is required unless using statement argument methods.</li>
+<li>The optional cols argument specifies which columns to return and is entered as a comma delimited string. Entering an empty value is equivilent to an asterisk (*).</li>
+<li>The optional where argument allows you to limit which rows are selected and only requires the column and its value. You can use any of the normal operators used in SQL statements:
+<ul>
+<li>"color IN ('blue','red')"</li>
+<li>"color='red' AND material='leather'"</li>
+<li>"brand LIKE 's%'"</li>
+<li>"price BETWEEN 200 AND 400"</li>
+</ul>
+<li>The optional order by argument is used to sort the resultset. SQL Server requires an order by argument and will throw an exception if not supplied.</li>
+<li>The limit and offset arguments default to 1 if not supplied. limit is the number of records to display per page. The offset argument is normally supplied by the global $_GET or $_POST variables.</li>
+</ul>
+
+            </div>
+			<div class="info_box">
+                <hr class="hide" />
+				<h4>Parameters:</h4>
+                <p>
+					<span style="color:#007700"><i>array</i></span> <span style="color:#0000BB">obj_paging</span> <span style="color:#666;">( [<i>str</i><span style="color:#FF8000;"> table</span>[, <i>str</i><span style="color:#FF8000;"> cols</span>[, <i>str</i><span style="color:#FF8000;"> where</span>[, <i>str</i><span style="color:#FF8000;"> order by</span>[, <i>str</i><span style="color:#FF8000;"> limit</span>[, <i>int</i><span style="color:#FF8000;"> offset</span> ]]]]]] )</span>
+				</p>
+			</div>
+			<div class="info_box">
+                <hr class="hide" />
+				<h4>Returns:</h4>
+				<p>
+					Array
+				</p>
+                <ul>
+                    <li>element[0]: Result resource/object or false on failure.</li>
+                    <li>element[1]: Unsigned integer - Number of last page.</li>
+                </ul>
+			</div>
+            <div class="info_box">
+                <hr class="hide" />
+				<h4>Example:</h4>
+				<div class="code">
+				<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;
+<br />
+<br /></span><span style="color: #007700">try&nbsp;
+<br />{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$limit&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;(&nbsp;isset(&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"limit"</span><span style="color: #007700">]&nbsp;)&nbsp;)&nbsp;?&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"limit"</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">=&nbsp;(&nbsp;isset(&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;)&nbsp;&amp;&amp;&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$rs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_paging</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"mytable"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"id,first_name,last_name"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"id"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$limit</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">);&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$rs</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last_page&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$rs</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_error</span><span style="color: #007700">()&nbsp;)&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">Exception</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_error_message</span><span style="color: #007700">()&nbsp;);&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;while(&nbsp;</span><span style="color: #0000BB">$row&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_fetch_object</span><span style="color: #007700">()&nbsp;)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id</span><span style="color: #007700">}</span><span style="color: #DD0000">:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">first_name</span><span style="color: #007700">}</span><span style="color: #DD0000">&nbsp;-&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">last_name</span><span style="color: #007700">}</span><span style="color: #DD0000">&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&amp;lt;&amp;lt;&amp;nbsp;&amp;nbsp;&amp;lt;&amp;nbsp;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=1&gt;&amp;lt;&amp;lt;&amp;nbsp;&amp;nbsp;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$prev&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$prev</span><span style="color: #DD0000">&gt;&amp;lt;&amp;nbsp;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&nbsp;[&nbsp;Page&nbsp;</span><span style="color: #0000BB">$offset</span><span style="color: #DD0000">&nbsp;of&nbsp;</span><span style="color: #0000BB">$last_page</span><span style="color: #DD0000">&nbsp;]&nbsp;"</span><span style="color: #007700">;&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">$last_page&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&amp;nbsp;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;gt;&amp;gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$next&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$next</span><span style="color: #DD0000">&gt;&amp;nbsp;&amp;gt;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$last_page</span><span style="color: #DD0000">&gt;&amp;nbsp;&amp;nbsp;&amp;gt;&amp;gt;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;p&gt;</span><span style="color: #0000BB">$output</span><span style="color: #DD0000">&lt;/p&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_free_result</span><span style="color: #007700">();&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">Displays</span><span style="color: #007700">:&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Stephanie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Parker&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;2</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Estaban&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">White&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;3</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Xavier&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Nichols&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;4</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Betty&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jefferies&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;5</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Stephanie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Clark&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;6</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Greg&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Pipes&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;9</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Ezra&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Yontz&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;11</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Marcia&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Raymer&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;13</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Andrew&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jordan&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;14</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Ian&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jenkins&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;15</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Howard&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Dixon&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;16</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Bonnie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Ward&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;17</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Louis&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Pipes&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;18</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Orson&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Schroeder&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;19</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Tiffany&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Darden&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;20</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Xavier&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Clark&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;21</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">George&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Raymer&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;22</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Cheryl&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Yontz&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;24</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Percy&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Cavenaugh&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;25</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">David&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Ingram&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;&lt;&nbsp;&nbsp;&lt;&nbsp;&nbsp;[&nbsp;</span><span style="color: #0000BB">Page&nbsp;1&nbsp;of&nbsp;23&nbsp;</span><span style="color: #007700">]&nbsp;&nbsp;&gt;&nbsp;&nbsp;&gt;&gt;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />}&nbsp;
+<br />catch&nbsp;(&nbsp;</span><span style="color: #0000BB">Exception&nbsp;$e&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//log&nbsp;error&nbsp;and/or&nbsp;redirect&nbsp;user&nbsp;to&nbsp;error&nbsp;page&nbsp;
+<br /></span><span style="color: #007700">}&nbsp;&nbsp;
+<br />
+<br />
+<br />try&nbsp;
+<br />{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//set&nbsp;arguments&nbsp;using&nbsp;statement&nbsp;argument&nbsp;helper&nbsp;methods&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$limit&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;(&nbsp;isset(&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"limit"</span><span style="color: #007700">]&nbsp;)&nbsp;)&nbsp;?&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"limit"</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">=&nbsp;(&nbsp;isset(&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;)&nbsp;&amp;&amp;&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">"page"</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_table</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"mytable"&nbsp;</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_cols</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"id,first_name,last_name"&nbsp;</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_order_by</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"id"&nbsp;</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_limit</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$limit&nbsp;</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_offset</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$rs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_paging</span><span style="color: #007700">();&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$rs</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last_page&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$rs</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_error</span><span style="color: #007700">()&nbsp;)&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">Exception</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_error_message</span><span style="color: #007700">()&nbsp;);&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;while(&nbsp;</span><span style="color: #0000BB">$row&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_fetch_object</span><span style="color: #007700">()&nbsp;)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id</span><span style="color: #007700">}</span><span style="color: #DD0000">:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">first_name</span><span style="color: #007700">}</span><span style="color: #DD0000">&nbsp;-&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$row</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">last_name</span><span style="color: #007700">}</span><span style="color: #DD0000">&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&amp;lt;&amp;lt;&amp;nbsp;&amp;nbsp;&amp;lt;&amp;nbsp;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=1&gt;&amp;lt;&amp;lt;&amp;nbsp;&amp;nbsp;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$prev&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$prev</span><span style="color: #DD0000">&gt;&amp;lt;&amp;nbsp;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&nbsp;[&nbsp;Page&nbsp;</span><span style="color: #0000BB">$offset</span><span style="color: #DD0000">&nbsp;of&nbsp;</span><span style="color: #0000BB">$last_page</span><span style="color: #DD0000">&nbsp;]&nbsp;"</span><span style="color: #007700">;&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">$last_page&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&amp;nbsp;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;gt;&amp;gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$next&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$offset&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$next</span><span style="color: #DD0000">&gt;&amp;nbsp;&amp;gt;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">.=&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=test_paging.php?page=</span><span style="color: #0000BB">$last_page</span><span style="color: #DD0000">&gt;&amp;nbsp;&amp;nbsp;&amp;gt;&amp;gt;&lt;/a&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;p&gt;</span><span style="color: #0000BB">$output</span><span style="color: #DD0000">&lt;/p&gt;"</span><span style="color: #007700">;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj_free_result</span><span style="color: #007700">();&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">Displays</span><span style="color: #007700">:&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Stephanie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Parker&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;2</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Estaban&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">White&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;3</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Xavier&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Nichols&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;4</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Betty&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jefferies&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;5</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Stephanie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Clark&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;6</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Greg&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Pipes&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;9</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Ezra&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Yontz&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;11</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Marcia&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Raymer&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;13</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Andrew&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jordan&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;14</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Ian&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Jenkins&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;15</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Howard&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Dixon&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;16</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Bonnie&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Ward&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;17</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Louis&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Pipes&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;18</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Orson&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Schroeder&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;19</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Tiffany&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Darden&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;20</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Xavier&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Clark&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;21</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">George&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Raymer&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;22</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Cheryl&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Yontz&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;24</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">Percy&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Cavenaugh&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;25</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">David&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">Ingram&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;&lt;&nbsp;&nbsp;&lt;&nbsp;&nbsp;[&nbsp;</span><span style="color: #0000BB">Page&nbsp;1&nbsp;of&nbsp;23&nbsp;</span><span style="color: #007700">]&nbsp;&nbsp;&gt;&nbsp;&nbsp;&gt;&gt;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />}&nbsp;
+<br />catch&nbsp;(&nbsp;</span><span style="color: #0000BB">Exception&nbsp;$e&nbsp;</span><span style="color: #007700">)&nbsp;&nbsp;
+<br />{&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//log&nbsp;error&nbsp;and/or&nbsp;redirect&nbsp;user&nbsp;to&nbsp;error&nbsp;page&nbsp;
+<br /></span><span style="color: #007700">}&nbsp;&nbsp;
+<br />
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code>
+				</div>
+                <hr class="hide" />
+                <p>See also:  <a href="obj_delete.html">obj_delete</a>, <a href="obj_insert.html">obj_insert</a>, <a href="obj_query.html">obj_query</a>, <a href="obj_select.html">obj_select</a>, <a href="obj_update.html">obj_update</a></p>
+			</div>
+        </div>
+       
+	</div>
+     <hr class="hide" />
+        <div id="footer">
+            Copyright &copy; 2016 under the <a href="zlib_libpng.html" title="zlib/libpng">zlib/libpng License</a>.
+            <br />
+            Documentation licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.
+        </div>
+</body>
+</html>
