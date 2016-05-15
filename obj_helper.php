@@ -16,7 +16,7 @@ class obj_helper
     /**********************************************
      * Public methods
      *********************************************/
-    
+
     /**
      * Check if PHP extension is enabled and return driver type or false on failure
      *
@@ -47,7 +47,7 @@ class obj_helper
         }
 
         return $obj_return;
-    } 
+    }
 
     /**
      * Returns delete query string
@@ -60,18 +60,18 @@ class obj_helper
     public static function obj_helper_delete( $table, $where, $data=false, $batch_id=false )
     {
         $query_where = '';
-		
+
         if ( !$data || !$batch_id )
         {
             $query_where = ( !trim( $where ) ) ? '' : "WHERE $where";
         }
-		else
+        else
         {
             $delete_data = ( is_array( $data ) ) ? implode( ',', $data ) : $data;
-            
-			$query_where = "WHERE $batch_id IN ($delete_data)";
+
+            $query_where = "WHERE $batch_id IN ($delete_data)";
         }
-		
+
         return "DELETE FROM $table $query_where";
     }
 
@@ -107,9 +107,9 @@ class obj_helper
      */
     public static function obj_helper_insert( $table, $data_array, $db_type )
     {
-		$query_sql = '';
-		
-        //$data_array MUST be a key value pair array 
+        $query_sql = '';
+
+        //$data_array MUST be a key value pair array
         //value can be a one dim array or comma delimited string
         $array_keys = array_keys( $data_array );
         $array_vals = array_values( $data_array );
@@ -123,10 +123,10 @@ class obj_helper
                 $array_vals[$i] = $temp_array;
             }
         }
-        
+
         //check for batch insert if count > 1
         $array_vals_cnt = count( $array_vals[0] );
-        
+
         for ( $i = 0; $i < count( $array_vals[0] ); $i++ )
         {
             $query_insert[] = '(';
@@ -134,23 +134,23 @@ class obj_helper
             for ( $j = 0; $j < count( $array_vals ); $j++ )
             {
                 if ( is_string( $array_vals[$j][$i] ) && !is_numeric( $array_vals[$j][$i] ) )
-					$query_insert[] = "'{$array_vals[$j][$i]}'";
+                    $query_insert[] = "'{$array_vals[$j][$i]}'";
                 else
                     $query_insert[] = $array_vals[$j][$i];
             }
 
             $query_insert[] = ')';
         }
-        
+
         $query_cols = implode( ',', $array_keys );
         $query_vals = str_replace([',),(,', ',)', '(,'], ['),(', ')', '('], implode( ',', $query_insert ) );
 
         if ( $array_vals_cnt > 1 && ( $db_type == 'firebird' || $db_type == 'oracle' ) )
-			$query_sql = self::obj_insert_sql( $query_cols, $query_vals, $db_type, $table );
+            $query_sql = self::obj_insert_sql( $query_cols, $query_vals, $db_type, $table );
         else
             $query_sql = "INSERT INTO $table ($query_cols) VALUES $query_vals";
-   
-		return $query_sql;
+
+        return $query_sql;
     }
 
     /**
@@ -173,7 +173,7 @@ class obj_helper
         $query_where = ( !trim( $where ) ) ? '' : "WHERE $where";
         $query_order = ( !trim( $order_by ) ) ? '' : "ORDER BY $order_by";
         $query_offset = ( $set_offset - 1 ) * $set_limit;
-        
+
         return [$query_cols, $query_where, $query_order , $set_limit, $query_offset];
     }
 
@@ -221,47 +221,47 @@ class obj_helper
      * @param  str     $table
      * @param  array   $data_array
      * @param  str     $where
-	 * @param  mixed   $batch_id
-	 * @param  mixed   $batch_field
+     * @param  mixed   $batch_id
+     * @param  mixed   $batch_field
      * @return str
      */
     public static function obj_helper_update( $table, $data_array, $where, $batch_id, $batch_field )
     {
-		$obj_return = '';
-		
+        $obj_return = '';
+
         if ( !$batch_id && !$batch_field )
-		{
-			//$data_array MUST be a key value pair array
-			$query_cols = array_keys( $data_array );
-			$query_vals = array_values( $data_array );
-			$query_where = ( !trim( $where ) ) ? '' : "WHERE $where";
-			$query_update = '';
+        {
+            //$data_array MUST be a key value pair array
+            $query_cols = array_keys( $data_array );
+            $query_vals = array_values( $data_array );
+            $query_where = ( !trim( $where ) ) ? '' : "WHERE $where";
+            $query_update = '';
 
-			for ( $i = 0; $i < count( $data_array ); $i++ )
-			{
-				if ( is_string( $query_vals[$i] ) && !is_numeric( $query_vals[$i] ) )
-					$query_update .= "{$query_cols[$i]}='{$query_vals[$i]}',";
-				else
-					$query_update .= "{$query_cols[$i]}={$query_vals[$i]},";
-			}
+            for ( $i = 0; $i < count( $data_array ); $i++ )
+            {
+                if ( is_string( $query_vals[$i] ) && !is_numeric( $query_vals[$i] ) )
+                    $query_update .= "{$query_cols[$i]}='{$query_vals[$i]}',";
+                else
+                    $query_update .= "{$query_cols[$i]}={$query_vals[$i]},";
+            }
 
-			$query_vars = rtrim( $query_update, ',' );
+            $query_vars = rtrim( $query_update, ',' );
 
-			$obj_return = "UPDATE $table SET $query_vars $query_where";
-		}
-		else
-		{
-			//treat as batch process
-			$obj_return = self::obj_update_sql( $data_array, $batch_id, $batch_field, $table );
-		}
-				
-		return $obj_return;
+            $obj_return = "UPDATE $table SET $query_vars $query_where";
+        }
+        else
+        {
+            //treat as batch process
+            $obj_return = self::obj_update_sql( $data_array, $batch_id, $batch_field, $table );
+        }
+
+        return $obj_return;
     }
-    
+
     /**********************************************
      * Private methods
      *********************************************/
-    
+
     /**
      * Validate and load driver extension or false on failure
      *
@@ -292,7 +292,7 @@ class obj_helper
 
         return $obj_return;
     }
-    
+
     /**
      * Set SQL statement for batch inserts for firebird or oracle
      *
@@ -307,21 +307,21 @@ class obj_helper
     {
         $query_vals = explode( '~:^', ( str_replace( '),(', ')~:^(', $data ) ) );
         $query_sql = ( $db_type == 'firebird' ) ? 'EXECUTE BLOCK AS BEGIN ' : 'INSERT ALL ';
-        
+
         for ( $i = 0; $i < count( $query_vals ); $i++ )
         {
             if ( $db_type == 'firebird' )
                 $query_sql .= "INSERT INTO $table ($query_cols) VALUES $query_vals[$i];";
-            else 
+            else
                 $query_sql .= "INTO $table ($query_cols) VALUES $query_vals[$i] ";
         }
-        
+
         $query_sql .= ( $db_type == 'firebird' ) ? ' END' : ' SELECT * FROM DUAL';
-        
+
         return $query_sql;
     }
-	
-	/**
+
+    /**
      * Set SQL statement for batch updates
      *
      * @access private
@@ -332,22 +332,22 @@ class obj_helper
      */
     private static function obj_update_sql( $data_array, $batch_id, $batch_field, $table )
     {
-		$query_sql = "UPDATE $table SET $batch_field = CASE $batch_id ";
-		$query_cols = array_keys( $data_array );
-		$query_vals = array_values( $data_array );
-               
+        $query_sql = "UPDATE $table SET $batch_field = CASE $batch_id ";
+        $query_cols = array_keys( $data_array );
+        $query_vals = array_values( $data_array );
+
         for ( $i = 0; $i < count( $query_vals ); $i++ )
         {
-			if ( is_string( $query_vals[$i] ) && !is_numeric( $query_vals[$i] ) )
-				$query_sql .= "WHEN $query_cols[$i] THEN '{$query_vals[$i]}' ";
-			else
-				$query_sql .= "WHEN $query_cols[$i] THEN $query_vals[$i] ";
+            if ( is_string( $query_vals[$i] ) && !is_numeric( $query_vals[$i] ) )
+                $query_sql .= "WHEN $query_cols[$i] THEN '{$query_vals[$i]}' ";
+            else
+                $query_sql .= "WHEN $query_cols[$i] THEN $query_vals[$i] ";
         }
-		
-		$query_sql .= "END WHERE $batch_id IN (" . implode( ',', $query_cols ) . ")";
-		
-		return $query_sql;
-	}
+
+        $query_sql .= "END WHERE $batch_id IN (" . implode( ',', $query_cols ) . ")";
+
+        return $query_sql;
+    }
 }
 
 /**
