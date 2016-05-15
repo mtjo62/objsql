@@ -68,7 +68,7 @@ class objSQL extends obj_access
      * @var    mixed
      */
     private $obj_helper;
-    
+
     /**
      * Database connection class instance
      *
@@ -92,7 +92,7 @@ class objSQL extends obj_access
      * @var    str
      */
     private $obj_version = '3.9.0';
-    
+
     /**
      * Query argument string vars
      *
@@ -100,13 +100,13 @@ class objSQL extends obj_access
      * @var    str
      */
     private $obj_cols;
-	private $obj_order_by;
+    private $obj_order_by;
     private $obj_sort_order;
     private $obj_table;
-	private $obj_batch_field = false;
-	private $obj_batch_id = false;
+    private $obj_batch_field = false;
+    private $obj_batch_id = false;
     private $obj_where;
-    
+
     /**
      * Query argument numeric vars
      *
@@ -115,7 +115,7 @@ class objSQL extends obj_access
      */
     private $obj_limit;
     private $obj_offset;
-    
+
     /**
      * Insert/Update query argument data array var
      *
@@ -123,7 +123,7 @@ class objSQL extends obj_access
      * @var    array
      */
     private $obj_data;
-    
+
     /**********************************************
      * Public methods
      *********************************************/
@@ -133,32 +133,32 @@ class objSQL extends obj_access
      *
      * @access public
      * @param  mixed $datasource
-     * @return void 
+     * @return void
      */
     public function __construct( $datasource )
     {
         $this->obj_datasource( $datasource );
     }
-	
-	/**
+
+    /**
      * Sets update/delete data array and col argument vars
      *
      * @access public
      * @param  mixed $data
-	 * @param  mixed $batch_id
-	 * @param  mixed $batch_field
-     * @return void 
+     * @param  mixed $batch_id
+     * @param  mixed $batch_field
+     * @return void
      */
     public function obj_batch_data( $data, $batch_id, $batch_field=false )
     {
-        $this->obj_data = $data; 
-		
-		//private vars set when performing batch delete/update queries
-		$this->obj_batch_id = $batch_id;
-		$this->obj_batch_field = $batch_field;
+        $this->obj_data = $data;
+
+        //private vars set when performing batch delete/update queries
+        $this->obj_batch_id = $batch_id;
+        $this->obj_batch_field = $batch_field;
     }
-    
-    /** 
+
+    /**
      * Closes current database connection
      *
      * @access public
@@ -168,8 +168,8 @@ class objSQL extends obj_access
     {
         return $this->obj_instance->obj_db_close();
     }
-    
-    /** 
+
+    /**
      * Sets columns argument var
      *
      * @access public
@@ -179,18 +179,18 @@ class objSQL extends obj_access
     {
         $this->obj_cols = $cols;
     }
-    
+
     /**
      * Sets insert/update data array argument var
      *
      * @access public
      * @param  array $data_array
-     * @return void 
+     * @return void
      */
     public function obj_data( $data_array )
     {
-        $this->obj_data = $data_array; 
-	}
+        $this->obj_data = $data_array;
+    }
 
     /**
      * Executes delete query and returns resultset object/resource
@@ -204,17 +204,17 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, $where );
-        
+
         //generate query resource
         $query_stmt = new obj_statement( obj_helper::obj_helper_delete( $this->obj_table, $this->obj_where, $this->obj_data, $this->obj_batch_id ), $this, $this->obj_trans_object );
-        
+
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //execute & return query result
         return is_object( $query_stmt ) ? $query_stmt->obj_query_execute() : false;
     }
-    
+
     /**
      * Returns error flag for current connection instance - true/false
      *
@@ -257,7 +257,7 @@ class objSQL extends obj_access
      */
     public function obj_info()
     {
-        return obj_helper::obj_helper_info( $this->obj_version, $this->obj_db_type, $this->obj_instance->obj_db_info(), $this->obj_db_driver );    
+        return obj_helper::obj_helper_info( $this->obj_version, $this->obj_db_type, $this->obj_instance->obj_db_info(), $this->obj_db_driver );
     }
 
     /**
@@ -272,47 +272,47 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, false, false, false, false, false, false, $data_array );
-        
+
         //generate query resource
         $query_stmt = new obj_statement( obj_helper::obj_helper_insert( $this->obj_table, $this->obj_data, $this->obj_db_type ), $this, $this->obj_trans_object );
 
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //execute & return query result
         return is_object( $query_stmt ) ? $query_stmt->obj_query_execute() : false;
     }
-    
+
     /**
      * Sets limit argument var
      *
      * @access public
      * @param  int $limit
-     * @return void 
+     * @return void
      */
     public function obj_limit( $limit )
     {
         $this->obj_limit = $limit;
     }
-    
+
     /**
      * Sets offset argument var
      *
      * @access public
      * @param  int $offset
-     * @return void 
+     * @return void
      */
     public function obj_offset( $offset )
     {
         $this->obj_offset = $offset;
     }
-    
+
     /**
      * Sets order by argument var
      *
      * @access public
      * @param  str $order_by
-     * @return void 
+     * @return void
      */
     public function obj_order_by( $order_by )
     {
@@ -335,15 +335,15 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, $cols, $where, $order_by, false, $limit, $offset );
-        
+
         //generate query string, last page and query resource
         $obj_paging = obj_helper::obj_helper_paging( $this->obj_cols, $this->obj_where, $this->obj_order_by, $this->obj_limit, $this->obj_offset );
         $query_stmt = new obj_statement( $this->obj_instance->obj_db_paging( $this->obj_table, $obj_paging[0], $obj_paging[1], $obj_paging[2], $obj_paging[3], $obj_paging[4] ), $this, $this->obj_trans_object );
         $obj_last_page = ceil( $this->obj_row_count( $this->obj_table, $this->obj_cols, $this->obj_where ) / $this->obj_limit );
-        
+
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //execute & return query result
         return is_object( $query_stmt ) ? [$query_stmt->obj_query_execute(), $obj_last_page] : false;
     }
@@ -380,7 +380,7 @@ class objSQL extends obj_access
         //execute & return query result
         return is_object( $query_stmt ) ? $query_stmt->obj_query_execute() : false;
     }
- 
+
     /**
      * Executes select count query and returns row count
      *
@@ -394,16 +394,16 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, $cols, $where );
-        
+
         //generate query arguments
         $obj_row_count_args = obj_helper::obj_helper_row_count( $this->obj_cols, $this->obj_where );
-        
+
         //execute rowcount
         $obj_row_count = $this->obj_instance->obj_db_rowcount( $this->obj_table, $obj_row_count_args[0], $obj_row_count_args[1] );
-        
+
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //return rowcount
         return $obj_row_count;
     }
@@ -423,35 +423,35 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, $cols, $where, $order_by, $sort_order );
-        
+
         //generate query resource
         $query_stmt = new obj_statement( obj_helper::obj_helper_select( $this->obj_table, $this->obj_cols, $this->obj_where, $this->obj_order_by, $this->obj_sort_order ), $this, $this->obj_trans_object );
-        
+
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //execute & return query result
         return is_object( $query_stmt ) ? $query_stmt->obj_query_execute() : false;
     }
-    
+
     /**
      * Sets sort order argument var
      *
      * @access public
      * @param  str $sort_order
-     * @return void 
+     * @return void
      */
     public function obj_sort_order( $sort_order )
     {
         $this->obj_sort_order = $sort_order;
     }
-    
+
     /**
      * Sets table argument var
      *
      * @access public
      * @param  str $table
-     * @return void 
+     * @return void
      */
     public function obj_table( $table )
     {
@@ -488,23 +488,23 @@ class objSQL extends obj_access
     {
         //set query arguments
         $this->obj_query_args_set( $table, false, $where, false, false, false, false, $data_array );
-		
-		//generate query resource
+
+        //generate query resource
         $query_stmt = new obj_statement( obj_helper::obj_helper_update( $this->obj_table, $this->obj_data, $this->obj_where, $this->obj_batch_id, $this->obj_batch_field ), $this, $this->obj_trans_object );
-        
+
         //reset query arguments
         $this->obj_query_args_reset();
-        
+
         //execute & return query result
         return is_object( $query_stmt ) ? $query_stmt->obj_query_execute() : false;
     }
-   
+
     /**
      * Sets where argument var
      *
      * @access public
      * @param  str $where
-     * @return void 
+     * @return void
      */
     public function obj_where( $where )
     {
@@ -530,17 +530,17 @@ class objSQL extends obj_access
         //if < objSQL 3.5.0 clean up string for backwards compatibility
         $this->obj_db_type = str_replace( 'sqlite3', 'sqlite', str_replace( 'pdo:', '', strtolower( $obj_datasource[0] ) ) );
         $this->obj_db_driver = obj_helper::obj_helper_datasource( $obj_datasource, $this->obj_db_type, $this->obj_driver_array );
-        
+
         if ( $this->obj_db_driver !== false )
         {
             //if valid driver, generate connection instance
             $this->obj_instance = new obj_connection( $obj_datasource );
             $obj_return = ( $this->obj_instance ) ? $this->obj_connection = $this->obj_instance->obj_db_connection() : false;
         }
-       
+
         return $obj_return;
     }
-    
+
     /**
      * Set query arguments
      *
@@ -552,8 +552,8 @@ class objSQL extends obj_access
      * @param  str   $sort_order
      * @param  int   $limit
      * @param  int   $offset
-     * @param  array $data_array 
-     * @return void 
+     * @param  array $data_array
+     * @return void
      */
     private function obj_query_args_set( $table=false, $cols=false, $where=false, $order_by=false, $sort_order=false, $limit=1, $offset=1, $data_array=false )
     {
@@ -566,7 +566,7 @@ class objSQL extends obj_access
         $this->obj_table = ( isset( $this->obj_table ) ) ? $this->obj_table : $table;
         $this->obj_where = ( isset( $this->obj_where ) ) ? $this->obj_where : $where;
     }
-    
+
     /**
      * Resets query arguments
      *
@@ -581,10 +581,10 @@ class objSQL extends obj_access
         $this->obj_sort_order = null;
         $this->obj_table = null;
         $this->obj_where = null;
-		$this->obj_batch_id = null;
-		$this->obj_batch_field = null;
+        $this->obj_batch_id = null;
+        $this->obj_batch_field = null;
     }
-    
+
     /*****************************************************************************************************
      * Abstract protected methods - prevents calling these methods outside of the objSQL controller class
      *****************************************************************************************************/
